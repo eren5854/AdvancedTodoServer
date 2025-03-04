@@ -1,0 +1,6 @@
+@AdvancedTodoServer.WebAPI_HostAddress = http://localhost:5058
+
+GET {{AdvancedTodoServer.WebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
