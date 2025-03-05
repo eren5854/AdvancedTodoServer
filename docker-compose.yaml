@@ -1,0 +1,11 @@
+services:
+
+
+  api:
+    build:
+      context: .
+      dockerfile: AdvancedTodoServer.WebAPI/Dockerfile
+    image: advanced-todo-server
+    container_name: AdvancedTodoServer
+    ports:
+      - 54060:8080
