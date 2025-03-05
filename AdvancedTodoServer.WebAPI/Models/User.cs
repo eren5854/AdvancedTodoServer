@@ -6,11 +6,13 @@ namespace AdvancedTodoServer.WebAPI.Models;
 [Table("users")]
 public sealed class User : Entity
 {
-    public string FulllName { get; set; } = string.Empty;
+    public string UserName { get; set; } = string.Empty;
     public string Password { get; set; } = string.Empty;
     public string? Avatar { get; set; }
     public int XP { get; set; }
     public int Level { get; set; }
+    public string? RefreshToken { get; set; }
+    public DateTime? RefreshTokenExpires { get; set; }
 
 
     public object SkillInfo => new
@@ -26,4 +28,6 @@ public sealed class User : Entity
     public Guid SkillId { get; set; }
     [JsonIgnore]
     public Skill Skill { get; set; } = default!;
+
+    public List<Todo>? Todos { get; set; }
 }

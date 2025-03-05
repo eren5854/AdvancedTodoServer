@@ -19,5 +19,10 @@ public class ApplicationDbContext : DbContext
             .HasOne(x => x.Skill)
             .WithOne()
             .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Entity<Todo>()
+            .HasOne(x => x.User)
+            .WithMany(x => x.Todos)
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }
