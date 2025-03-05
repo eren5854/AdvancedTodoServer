@@ -1,10 +1,12 @@
 ﻿using AdvancedTodoServer.WebAPI.Abstractions;
 using AdvancedTodoServer.WebAPI.DTOs;
 using AdvancedTodoServer.WebAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AdvancedTodoServer.WebAPI.Controllers;
 
+[Authorize(AuthenticationSchemes = "Bearer")]
 public sealed class TodosController(
     ITodoService todoService) : ApiController
 {
