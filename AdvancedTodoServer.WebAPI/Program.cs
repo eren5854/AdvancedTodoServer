@@ -3,9 +3,9 @@ using AdvancedTodoServer.WebAPI.Mapper;
 using AdvancedTodoServer.WebAPI.Options;
 using AdvancedTodoServer.WebAPI.Repositories;
 using AdvancedTodoServer.WebAPI.Services;
+using DotNetEnv;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,9 +21,14 @@ builder.Services.AddCors(options =>
         });
 });
 
+Env.Load();
+builder.Configuration.AddEnvironmentVariables();
+var connectionString = Environment.GetEnvironmentVariable("DEFAULT_CONNECTION");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection")));
+    //options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+
 });
 
 builder.Services.Configure<JwtOption>(builder.Configuration.GetSection("Jwt"));
